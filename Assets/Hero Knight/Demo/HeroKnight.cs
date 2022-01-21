@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
 
-public class HeroKnight : MonoBehaviour {
-
+public class HeroKnight : MonoBehaviour
+{
     [SerializeField] float      m_speed = 4.0f;
-    [SerializeField] float      m_jumpForce = 7.5f;
+    [SerializeField] float     m_jumpForce = 7.5f;
     [SerializeField] float      m_rollForce = 6.0f;
     [SerializeField] bool       m_noBlood = false;
     [SerializeField] GameObject m_slideDust;
@@ -17,15 +16,15 @@ public class HeroKnight : MonoBehaviour {
     private Sensor_HeroKnight   m_wallSensorR2;
     private Sensor_HeroKnight   m_wallSensorL1;
     private Sensor_HeroKnight   m_wallSensorL2;
-    private bool                m_isWallSliding = false;
-    private bool                m_grounded = false;
-    private bool                m_rolling = false;
-    private int                 m_facingDirection = 1;
-    private int                 m_currentAttack = 0;
-    private float               m_timeSinceAttack = 0.0f;
-    private float               m_delayToIdle = 0.0f;
-    private float               m_rollDuration = 8.0f / 14.0f;
-    private float               m_rollCurrentTime;
+    private bool    m_isWallSliding = false;
+    private bool    m_grounded = false;
+    private bool    m_rolling = false;
+    private int     m_facingDirection = 1;
+    private int     m_currentAttack = 0;
+    private float   m_timeSinceAttack = 0.0f;
+    private float   m_delayToIdle = 0.0f;
+    private float   m_rollDuration = 8.0f / 14.0f;
+    private float   m_rollCurrentTime;
 
     PlayerInput playerInput;
     InputAction moveAction;
@@ -36,7 +35,8 @@ public class HeroKnight : MonoBehaviour {
     InputAction deathAction;
     InputAction jumpAction;
 
-    private void Awake() {
+    private void Awake()
+    {
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         attackAction = playerInput.actions["Attack"];
@@ -45,10 +45,10 @@ public class HeroKnight : MonoBehaviour {
         hurtAction = playerInput.actions["Hurt"];
         deathAction = playerInput.actions["Death"];
         jumpAction = playerInput.actions["Jump"];
-        
+
     }
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
@@ -60,17 +60,17 @@ public class HeroKnight : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         // Increase timer that controls attack combo
         m_timeSinceAttack += Time.deltaTime;
 
         // Increase timer that checks roll duration
-        if(m_rolling)
+        if (m_rolling)
             m_rollCurrentTime += Time.deltaTime;
 
         // Disable rolling if timer extends duration
-        if(m_rollCurrentTime > m_rollDuration)
+        if (m_rollCurrentTime > m_rollDuration)
             m_rolling = false;
 
         //Check if character just landed on the ground
@@ -96,7 +96,7 @@ public class HeroKnight : MonoBehaviour {
             GetComponent<SpriteRenderer>().flipX = false;
             m_facingDirection = 1;
         }
-            
+
         else if (inputX < 0)
         {
             GetComponent<SpriteRenderer>().flipX = true;
@@ -121,13 +121,13 @@ public class HeroKnight : MonoBehaviour {
             m_animator.SetBool("noBlood", m_noBlood);
             m_animator.SetTrigger("Death");
         }
-            
+
         //Hurt
         else if (hurtAction.triggered && !m_rolling)
             m_animator.SetTrigger("Hurt");
 
         //Attack
-        else if(attackAction.triggered && m_timeSinceAttack > 0.25f && !m_rolling)
+        else if (attackAction.triggered && m_timeSinceAttack > 0.25f && !m_rolling)
         {
             m_currentAttack++;
 
@@ -163,7 +163,7 @@ public class HeroKnight : MonoBehaviour {
             m_animator.SetTrigger("Roll");
             m_body2d.velocity = new Vector2(m_facingDirection * m_rollForce, m_body2d.velocity.y);
         }
-            
+
 
         //Jump
         else if (jumpAction.triggered && m_grounded && !m_rolling)
@@ -188,8 +188,8 @@ public class HeroKnight : MonoBehaviour {
         {
             // Prevents flickering transitions to idle
             m_delayToIdle -= Time.deltaTime;
-                if(m_delayToIdle < 0)
-                    m_animator.SetInteger("AnimState", 0);
+            if (m_delayToIdle < 0)
+                m_animator.SetInteger("AnimState", 0);
         }
     }
 
