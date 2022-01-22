@@ -10,7 +10,7 @@ public class HeroKnight : MonoBehaviour
     [SerializeField] GameObject m_slideDust;
 
     [SerializeField] Shaker     hudShaker;
-    [SerializeField] ColorChanger colorChanger;
+    [SerializeField] ColorChanger[] colorChangers;
 
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
@@ -199,7 +199,8 @@ public class HeroKnight : MonoBehaviour
     public void Hurt()
     {
         hudShaker.StartCoroutine("Shake");
-        colorChanger.StartCoroutine("InterpolateColor");
+        foreach (ColorChanger ch in colorChangers)
+            ch.StartCoroutine("InterpolateColor");
         m_animator.SetTrigger("Hurt");
     }
     // Animation Events
