@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Shaker : MonoBehaviour
 {
-    [SerializeField]float speed = 1.0f; //how fast it shakes
-    [SerializeField]float amount = 1.0f; //how much it shakes
+    [SerializeField] float magnitude;
+    [SerializeField] float duration;
     RectTransform rectTransform;
     Vector2 mover;
 
@@ -14,11 +14,20 @@ public class Shaker : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
         mover = new Vector2();
     }
-    void Update()
+    public IEnumerator Shake()
     {
-        mover.x = Mathf.Sin(Time.time * speed) * amount;
-        mover.y = Mathf.Cos(Time.time * speed) * amount;
-        rectTransform.Translate(mover);
-        //rectTransform.LeanSetPosY(y);
+        Vector3 orignalPosition = transform.position;
+        float elapsed = 0f;
+        Debug.Log("Vértigo, papá");
+        while (elapsed < duration)
+        {
+            mover.x = Random.Range(-1f, 1f) * magnitude;
+            mover.y = Random.Range(-1f, 1f) * magnitude;
+
+            transform.Translate(mover);
+            elapsed += Time.deltaTime;
+            yield return 0;
+        }
+        transform.position = orignalPosition;
     }
 }

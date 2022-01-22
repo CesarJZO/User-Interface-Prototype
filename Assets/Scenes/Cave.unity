@@ -882,6 +882,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9043920546160527475, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
+      propertyPath: hudShaker
+      value: 
+      objectReference: {fileID: 1861596042}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
 --- !u!1 &1207881953
@@ -2996,8 +3000,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76718086ecd25ea41bf78edcf298ad6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  amount: 1
+  magnitude: 2
+  duration: 1
 --- !u!1 &2007498679
 GameObject:
   m_ObjectHideFlags: 0
