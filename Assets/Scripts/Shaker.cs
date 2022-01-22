@@ -1,33 +1,33 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shaker : MonoBehaviour
 {
     [SerializeField] float magnitude;
-    [SerializeField] float duration;
-    RectTransform rectTransform;
+    [SerializeField] float duration = 1;
+    [SerializeField] float timeToReturn;
     Vector2 mover;
+    Vector3 orignalPosition;
 
     void Awake()
     {
-        rectTransform = GetComponent<RectTransform>();
         mover = new Vector2();
     }
-    public IEnumerator Shake()
+    void Start()
     {
-        Vector3 orignalPosition = transform.position;
+        orignalPosition = transform.position;
+    }
+    IEnumerator Shake()
+    {
         float elapsed = 0f;
-        Debug.Log("Vértigo, papá");
         while (elapsed < duration)
         {
             mover.x = Random.Range(-1f, 1f) * magnitude;
             mover.y = Random.Range(-1f, 1f) * magnitude;
-
             transform.Translate(mover);
             elapsed += Time.deltaTime;
             yield return 0;
         }
-        transform.position = orignalPosition;
+        transform.LeanMove(orignalPosition, timeToReturn).setEaseOutBack();
     }
 }

@@ -10,6 +10,7 @@ public class HeroKnight : MonoBehaviour
     [SerializeField] GameObject m_slideDust;
 
     [SerializeField] Shaker     hudShaker;
+    [SerializeField] ColorChanger colorChanger;
 
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
@@ -126,10 +127,7 @@ public class HeroKnight : MonoBehaviour
 
         //Hurt
         else if (hurtAction.triggered && !m_rolling)
-        {
-            hudShaker.StartCoroutine("Shake");
-            m_animator.SetTrigger("Hurt");
-        }
+            Hurt();
 
         //Attack
         else if (attackAction.triggered && m_timeSinceAttack > 0.25f && !m_rolling)
@@ -198,6 +196,12 @@ public class HeroKnight : MonoBehaviour
         }
     }
 
+    public void Hurt()
+    {
+        hudShaker.StartCoroutine("Shake");
+        colorChanger.StartCoroutine("InterpolateColor");
+        m_animator.SetTrigger("Hurt");
+    }
     // Animation Events
     // Called in slide animation.
     void AE_SlideDust()
