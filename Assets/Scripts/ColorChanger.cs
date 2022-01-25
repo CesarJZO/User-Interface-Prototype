@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ColorChanger : MonoBehaviour
 {
+    [SerializeField] HeroKnight player;
     [SerializeField] float duration = 1;
     Color initialColor;
     Color finalColor;
@@ -13,6 +14,16 @@ public class ColorChanger : MonoBehaviour
         image = GetComponent<Image>();
         initialColor = image.color;
         finalColor = Color.red;
+    }
+
+    private void Start()
+    {
+        player.OnPlayerHit += Player_OnPlayerHit;
+    }
+
+    private void Player_OnPlayerHit(object sender, System.EventArgs e)
+    {
+        StartCoroutine("InterpolateColor");
     }
 
     IEnumerator InterpolateColor()

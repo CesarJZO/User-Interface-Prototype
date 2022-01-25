@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Shaker : MonoBehaviour
 {
+    [SerializeField] HeroKnight player;
     [SerializeField] float magnitude;
     [SerializeField] float duration = 1;
     [SerializeField] float timeToReturn;
@@ -15,8 +16,15 @@ public class Shaker : MonoBehaviour
     }
     void Start()
     {
+        player.OnPlayerHit += Knight_OnPlayerHit;
         orignalPosition = transform.position;
     }
+
+    private void Knight_OnPlayerHit(object sender, System.EventArgs e)
+    {
+        StartCoroutine("Shake");
+    }
+
     IEnumerator Shake()
     {
         float elapsed = 0f;

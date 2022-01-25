@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class HeroKnight : MonoBehaviour
@@ -9,8 +10,7 @@ public class HeroKnight : MonoBehaviour
     [SerializeField] bool       m_noBlood = false;
     [SerializeField] GameObject m_slideDust;
 
-    [SerializeField] Shaker     hudShaker;
-    [SerializeField] ColorChanger[] colorChangers;
+    public event EventHandler OnPlayerHit;
 
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
@@ -198,10 +198,8 @@ public class HeroKnight : MonoBehaviour
 
     public void Hurt()
     {
-        hudShaker.StartCoroutine("Shake");
-        foreach (ColorChanger ch in colorChangers)
-            ch.StartCoroutine("InterpolateColor");
         m_animator.SetTrigger("Hurt");
+        OnPlayerHit?.Invoke(this, EventArgs.Empty);
     }
     // Animation Events
     // Called in slide animation.
