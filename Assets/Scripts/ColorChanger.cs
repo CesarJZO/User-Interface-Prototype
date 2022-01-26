@@ -31,7 +31,7 @@ public class ColorChanger : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < duration)
         {
-            float num = Random.Range(0, 1f);
+            float num = Random.Range(0f, 1f);
             image.color = Color.Lerp(initialColor, finalColor, num);
             elapsed += Time.deltaTime;
             yield return 0;
