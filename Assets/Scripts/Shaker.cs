@@ -3,39 +3,38 @@ using UnityEngine;
 
 public class Shaker : MonoBehaviour
 {
-    [SerializeField] HeroKnight player;
-    [SerializeField] float magnitude;
-    [SerializeField] float duration = 1;
-    [SerializeField] float timeToReturn;
-    Vector2 mover;
-    Vector3 orignalPosition;
+    [SerializeField] float _magnitude;
+    [SerializeField] float _timeToReturn;
+    float _duration = 1;
+    Vector2 _mover;
+    Vector3 _orignalPosition;
 
     void Awake()
     {
-        mover = new Vector2();
+        _mover = new Vector2();
     }
     void Start()
     {
-        player.OnPlayerHit += Knight_OnPlayerHit;
-        orignalPosition = transform.position;
+        _orignalPosition = transform.position;
     }
 
-    private void Knight_OnPlayerHit(object sender, System.EventArgs e)
+    public void Shake(float duration)
     {
-        StartCoroutine("Shake");
+        this._duration = duration;
+        StartCoroutine(Shake());
     }
 
     IEnumerator Shake()
     {
         float elapsed = 0f;
-        while (elapsed < duration)
+        while (elapsed < _duration)
         {
-            mover.x = Random.Range(-1f, 1f) * magnitude;
-            mover.y = Random.Range(-1f, 1f) * magnitude;
-            transform.Translate(mover);
+            _mover.x = Random.Range(-1f, 1f) * _magnitude;
+            _mover.y = Random.Range(-1f, 1f) * _magnitude;
+            transform.Translate(_mover);
             elapsed += Time.deltaTime;
             yield return 0;
         }
-        transform.LeanMove(orignalPosition, timeToReturn).setEaseOutBack();
+        transform.LeanMove(_orignalPosition, _timeToReturn).setEaseOutBack();
     }
 }

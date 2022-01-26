@@ -1,6 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class HeroKnight : MonoBehaviour
 {
@@ -10,7 +10,8 @@ public class HeroKnight : MonoBehaviour
     [SerializeField] bool       m_noBlood = false;
     [SerializeField] GameObject m_slideDust;
 
-    public event EventHandler OnPlayerHit;
+    [SerializeField] float _effectsDuration;
+    public UnityEvent<float> OnPlayerHit;
 
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
@@ -199,7 +200,7 @@ public class HeroKnight : MonoBehaviour
     public void Hurt()
     {
         m_animator.SetTrigger("Hurt");
-        OnPlayerHit?.Invoke(this, EventArgs.Empty);
+        OnPlayerHit?.Invoke(_effectsDuration);
     }
     // Animation Events
     // Called in slide animation.

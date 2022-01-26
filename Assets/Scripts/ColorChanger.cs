@@ -3,8 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ColorChanger : MonoBehaviour
 {
-    [SerializeField] HeroKnight player;
-    [SerializeField] float duration = 1;
+    float duration = 1;
     Color initialColor;
     Color finalColor;
     Image image;
@@ -16,14 +15,10 @@ public class ColorChanger : MonoBehaviour
         finalColor = Color.red;
     }
 
-    private void Start()
+    public void InterpolateColor(float duration)
     {
-        player.OnPlayerHit += Player_OnPlayerHit;
-    }
-
-    private void Player_OnPlayerHit(object sender, System.EventArgs e)
-    {
-        StartCoroutine("InterpolateColor");
+        this.duration = duration;
+        StartCoroutine(InterpolateColor());
     }
 
     IEnumerator InterpolateColor()
