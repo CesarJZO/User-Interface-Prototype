@@ -20,7 +20,7 @@ public class Shaker : MonoBehaviour
 
     public void Shake(float duration)
     {
-        this._duration = duration;
+        _duration = duration;
         StartCoroutine(Shake());
     }
 

@@ -30,25 +30,25 @@ public class HeroKnight : MonoBehaviour
     private float   m_rollDuration = 8.0f / 14.0f;
     private float   m_rollCurrentTime;
 
-    PlayerInput playerInput;
-    InputAction moveAction;
-    InputAction attackAction;
-    InputAction blockAction;
-    InputAction rollAction;
-    InputAction hurtAction;
-    InputAction deathAction;
-    InputAction jumpAction;
+    PlayerInput _playerInput;
+    InputAction _moveAction;
+    InputAction _attackAction;
+    InputAction _blockAction;
+    InputAction _rollAction;
+    InputAction _hurtAction;
+    InputAction _deathAction;
+    InputAction _jumpAction;
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
-        moveAction = playerInput.actions["Move"];
-        attackAction = playerInput.actions["Attack"];
-        blockAction = playerInput.actions["Block"];
-        rollAction = playerInput.actions["Roll"];
-        hurtAction = playerInput.actions["Hurt"];
-        deathAction = playerInput.actions["Death"];
-        jumpAction = playerInput.actions["Jump"];
+        _playerInput = GetComponent<PlayerInput>();
+        _moveAction = _playerInput.actions["Move"];
+        _attackAction = _playerInput.actions["Attack"];
+        _blockAction = _playerInput.actions["Block"];
+        _rollAction = _playerInput.actions["Roll"];
+        _hurtAction = _playerInput.actions["Hurt"];
+        _deathAction = _playerInput.actions["Death"];
+        _jumpAction = _playerInput.actions["Jump"];
 
     }
     // Use this for initialization
@@ -92,7 +92,7 @@ public class HeroKnight : MonoBehaviour
         }
 
         // -- Handle input and movement --
-        float inputX = moveAction.ReadValue<Vector2>().x;
+        float inputX = _moveAction.ReadValue<Vector2>().x;
 
         // Swap direction of sprite depending on walk direction
         if (inputX > 0)
@@ -120,18 +120,18 @@ public class HeroKnight : MonoBehaviour
         m_animator.SetBool("WallSlide", m_isWallSliding);
 
         //Death
-        if (deathAction.triggered && !m_rolling)
+        if (_deathAction.triggered && !m_rolling)
         {
             m_animator.SetBool("noBlood", m_noBlood);
             m_animator.SetTrigger("Death");
         }
 
         //Hurt
-        else if (hurtAction.triggered && !m_rolling)
+        else if (_hurtAction.triggered && !m_rolling)
             Hurt();
 
         //Attack
-        else if (attackAction.triggered && m_timeSinceAttack > 0.25f && !m_rolling)
+        else if (_attackAction.triggered && m_timeSinceAttack > 0.25f && !m_rolling)
         {
             m_currentAttack++;
 
@@ -151,17 +151,17 @@ public class HeroKnight : MonoBehaviour
         }
 
         // Block
-        else if (blockAction.WasPressedThisFrame() && !m_rolling)
+        else if (_blockAction.WasPressedThisFrame() && !m_rolling)
         {
             m_animator.SetTrigger("Block");
             m_animator.SetBool("IdleBlock", true);
         }
 
-        else if (blockAction.WasReleasedThisFrame())
+        else if (_blockAction.WasReleasedThisFrame())
             m_animator.SetBool("IdleBlock", false);
 
         // Roll
-        else if (rollAction.triggered && !m_rolling && !m_isWallSliding)
+        else if (_rollAction.triggered && !m_rolling && !m_isWallSliding)
         {
             m_rolling = true;
             m_animator.SetTrigger("Roll");
@@ -170,7 +170,7 @@ public class HeroKnight : MonoBehaviour
 
 
         //Jump
-        else if (jumpAction.triggered && m_grounded && !m_rolling)
+        else if (_jumpAction.triggered && m_grounded && !m_rolling)
         {
             m_animator.SetTrigger("Jump");
             m_grounded = false;
