@@ -48,6 +48,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -304,6 +305,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Health: 7408080615122143386
+      Item_Box: -5689903818810248906
+      Minimap: 1859540651248933846
+      Bar_Border: -1907738961295897313
+      Generic HUD_3: -5967652444369644189
+      Magic: 4112015067840732046
+      Stamina: -8946754237356405213
+      Minimap_Border: 85450868454467572
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
