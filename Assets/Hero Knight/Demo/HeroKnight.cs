@@ -4,6 +4,8 @@ using UnityEngine.Events;
 
 public class HeroKnight : MonoBehaviour
 {
+    public static Vector2 Direction { get; private set; }
+
     [SerializeField] float      m_speed = 4.0f;
     [SerializeField] float      m_jumpForce = 7.5f;
     [SerializeField] float      m_rollForce = 6.0f;
@@ -40,8 +42,10 @@ public class HeroKnight : MonoBehaviour
     InputAction _deathAction;
     InputAction _jumpAction;
 
+    Rigidbody2D _rigidbody;
     private void Awake()
     {
+        _rigidbody = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
         _moveAction = _playerInput.actions["Move"];
         _attackAction = _playerInput.actions["Attack"];
@@ -50,7 +54,6 @@ public class HeroKnight : MonoBehaviour
         _hurtAction = _playerInput.actions["Hurt"];
         _deathAction = _playerInput.actions["Death"];
         _jumpAction = _playerInput.actions["Jump"];
-
     }
     // Use this for initialization
     void Start()
@@ -67,6 +70,7 @@ public class HeroKnight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Direction = _rigidbody.velocity.normalized;
         // Increase timer that controls attack combo
         m_timeSinceAttack += Time.deltaTime;
 

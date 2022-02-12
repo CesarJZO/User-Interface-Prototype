@@ -1,8 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HUDMover : MonoBehaviour
 {
+    [SerializeField] float _maxDistance = 1;
     [SerializeField] float _speed = 10;
     [SerializeField] float _magnitude;
     [SerializeField] float _timeToReturn;
@@ -23,22 +25,33 @@ public class HUDMover : MonoBehaviour
         _positionZero = _rectTransform.position;
     }
 
+    void Update()
+    {
+        Vector2 direction = HeroKnight.Direction;
+        // if (Vector2.Distance(_positionZero, direction + _positionZero) < _maxDistance &&
+        //     Vector2.zero != direction)
+            transform.Translate(-direction);
+        // ! Delete this
+        if (Gamepad.current.buttonNorth.wasPressedThisFrame)
+            transform.LeanMove(_positionZero, _timeToReturn).setEaseOutBack();
+    }
+
     public void Run(bool isRunning)
     {
-        if (isRunning)
-        {
-            _mover = _positionZero;
-            _mover.y = _positionZero.y + Mathf.Sin(Time.time * _speed) * _magnitude;
-            _rectTransform.position = _mover;
-        }
-        else
-            transform.LeanMove(_orignalPosition, _timeToReturn/2).setEaseOutBack();
+        // if (isRunning)
+        // {
+        //     _mover = _positionZero;
+        //     _mover.y = _positionZero.y + Mathf.Sin(Time.time * _speed) * _magnitude;
+        //     _rectTransform.position = _mover;
+        // }
+        // else
+        //     transform.LeanMove(_orignalPosition, _timeToReturn/2).setEaseOutBack();
     }
 
     public void Shake(float duration)
     {
         _duration = duration;
-        StartCoroutine(Shake());
+        // StartCoroutine(Shake());
     }
 
     IEnumerator Shake()
