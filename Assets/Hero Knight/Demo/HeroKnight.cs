@@ -70,7 +70,7 @@ public class HeroKnight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Direction = _rigidbody.velocity.normalized;
+        Direction = _rigidbody.velocity;
         // Increase timer that controls attack combo
         m_timeSinceAttack += Time.deltaTime;
 
