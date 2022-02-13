@@ -12,7 +12,7 @@ public class HeroKnight : MonoBehaviour
 
     [SerializeField] float _effectsDuration;
     public UnityEvent<float> OnPlayerHit;
-    public UnityEvent<bool> OnPlayerRun;
+    public UnityEvent OnPlayerRun;
     public UnityEvent<Vector3> OnPlayerMove;
 
     private Animator            m_animator;
@@ -188,7 +188,7 @@ public class HeroKnight : MonoBehaviour
             // Reset timer
             m_delayToIdle = 0.05f;
             m_animator.SetInteger("AnimState", 1);
-            OnPlayerRun?.Invoke(true && m_grounded);
+            OnPlayerRun?.Invoke();
         }
 
         //Idle
@@ -198,7 +198,6 @@ public class HeroKnight : MonoBehaviour
             m_delayToIdle -= Time.deltaTime;
             if (m_delayToIdle < 0)
                 m_animator.SetInteger("AnimState", 0);
-            OnPlayerRun?.Invoke(false && m_grounded);
         }
     }
 

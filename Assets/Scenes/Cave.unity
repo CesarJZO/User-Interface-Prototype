@@ -212,6 +212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade8698a04488c5488351fb08b9c50d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _duration: 1
+  _finalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &20546159
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,6 +743,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade8698a04488c5488351fb08b9c50d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _duration: 1
+  _finalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &284425662
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,7 +1555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9043920546160527475, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: OnPlayerRun.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9043920546160527475, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: OnPlayerMove.m_PersistentCalls.m_Calls.Array.size
@@ -1579,7 +1583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9043920546160527475, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: OnPlayerRun.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9043920546160527475, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: OnPlayerMove.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1608,7 +1612,7 @@ PrefabInstance:
     - target: {fileID: 9043920546160527475, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: OnPlayerRun.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1861596042}
+      objectReference: {fileID: 0}
     - target: {fileID: 9043920546160527475, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: OnPlayerMove.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1691,7 +1695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9043920546160527475, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: OnPlayerRun.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: HUDMover, Assembly-CSharp
+      value: HUDAnimations.Runner, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 9043920546160527475, guid: a4b4a6d32bcb19248a754d6602ffc7e4, type: 3}
       propertyPath: OnPlayerMove.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1825,6 +1829,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade8698a04488c5488351fb08b9c50d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _duration: 1
+  _finalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1234106001
 GameObject:
   m_ObjectHideFlags: 0
@@ -4500,7 +4506,7 @@ MonoBehaviour:
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_CameraDistance: 10
+  m_CameraDistance: 1
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
@@ -4702,7 +4708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76718086ecd25ea41bf78edcf298ad6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _center: {fileID: 208010277}
+  _centerReference: {fileID: 208010277}
   _smoothTime: 0.1
   _magnitude: 2
 --- !u!1 &1879856953
@@ -4764,7 +4770,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007498679}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4818,7 +4824,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9206349, y: 1}
+    m_SensorSize: {x: 1.9257294, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4916,6 +4922,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade8698a04488c5488351fb08b9c50d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _duration: 1
+  _finalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &2093493202
 GameObject:
   m_ObjectHideFlags: 0
@@ -5070,7 +5078,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2128710728}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
