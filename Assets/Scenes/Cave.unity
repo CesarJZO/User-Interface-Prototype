@@ -4704,8 +4704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _center: {fileID: 208010277}
   _smoothTime: 0.1
-  _maxDistance: 75
-  _speed: 500
+  _speed: 0
   _magnitude: 10
   _timeToReturn: 1
 --- !u!1 &1879856953

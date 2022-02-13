@@ -5,7 +5,6 @@ public class HUDMover : MonoBehaviour
 {
     [SerializeField] RectTransform _center;
     [SerializeField] float _smoothTime = 0.1f;
-    [SerializeField] float _maxDistance = 30;
     [SerializeField] float _speed = 500;
     [SerializeField] float _magnitude = 10;
     [SerializeField] float _timeToReturn = 1;
@@ -19,10 +18,10 @@ public class HUDMover : MonoBehaviour
 
     public void Follow(Vector3 velocity)
     {
-        Vector3 target = _center.position + velocity;
-        Vector3 fastVelocity = Vector3.ClampMagnitude(-velocity * _speed, _maxDistance);
+        Vector3 target = _center.position - velocity;
+        Vector3 zero = Vector3.zero;
         transform.position = Vector3.SmoothDamp(
-            transform.position, target, ref fastVelocity, _smoothTime, _speed);
+            transform.position, target, ref zero, _smoothTime);
     }
 
     public void Run(bool isRunning)
