@@ -1,15 +1,15 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class HUDMover : MonoBehaviour
 {
     [SerializeField] RectTransform _center;
-    [SerializeField] float _maxDistance = 1;
-    [SerializeField] float _speed = 10;
-    [SerializeField] float _magnitude;
-    [SerializeField] float _timeToReturn;
-    float _duration = 1;
+    [SerializeField] float _smoothTime = 0.1f;
+    [SerializeField] float _maxDistance = 30;
+    [SerializeField] float _speed = 500;
+    [SerializeField] float _magnitude = 10;
+    [SerializeField] float _timeToReturn = 1;
+    float _duration;
     Vector2 _mover;
 
     void Awake()
@@ -17,11 +17,12 @@ public class HUDMover : MonoBehaviour
         _mover = new Vector2();
     }
 
-    void Update()
+    public void Follow(Vector3 velocity)
     {
-        Vector3 direction = HeroKnight.Direction;
-        transform.position = _center.position + 
-            Vector3.ClampMagnitude(-direction, _maxDistance);
+        Vector3 target = _center.position + velocity;
+        Vector3 fastVelocity = Vector3.ClampMagnitude(-velocity * _speed, _maxDistance);
+        transform.position = Vector3.SmoothDamp(
+            transform.position, target, ref fastVelocity, _smoothTime, _speed);
     }
 
     public void Run(bool isRunning)
