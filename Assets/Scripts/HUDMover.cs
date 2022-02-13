@@ -5,9 +5,7 @@ public class HUDMover : MonoBehaviour
 {
     [SerializeField] RectTransform _center;
     [SerializeField] float _smoothTime = 0.1f;
-    [SerializeField] float _speed = 500;
     [SerializeField] float _magnitude = 10;
-    [SerializeField] float _timeToReturn = 1;
     float _duration;
     Vector2 _mover;
 
@@ -18,7 +16,7 @@ public class HUDMover : MonoBehaviour
 
     public void Follow(Vector3 velocity)
     {
-        Vector3 target = _center.position - velocity;
+        Vector3 target = _center.position - velocity * _magnitude;
         Vector3 zero = Vector3.zero;
         transform.position = Vector3.SmoothDamp(
             transform.position, target, ref zero, _smoothTime);
@@ -47,12 +45,11 @@ public class HUDMover : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < _duration)
         {
-            _mover.x = Random.Range(-1f, 1f) * _magnitude;
-            _mover.y = Random.Range(-1f, 1f) * _magnitude;
+            _mover.x = Random.Range(-1f, 1f) * _magnitude * 2;
+            _mover.y = Random.Range(-1f, 1f) * _magnitude * 2;
             transform.Translate(_mover);
             elapsed += Time.deltaTime;
             yield return 0;
         }
-        transform.LeanMove(_center.position, _timeToReturn).setEaseOutBack();
     }
 }
