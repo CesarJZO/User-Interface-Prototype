@@ -1794,7 +1794,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _centerReference: {fileID: 208010277}
   _speed: 5
-  _magnitude: 2
+  _magnitude: 1
 --- !u!1 &1207881953
 GameObject:
   m_ObjectHideFlags: 0
