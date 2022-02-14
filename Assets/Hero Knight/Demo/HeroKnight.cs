@@ -4,16 +4,17 @@ using UnityEngine.Events;
 
 public class HeroKnight : MonoBehaviour
 {
+    public static Vector3 Velocity;
     [SerializeField] float      m_speed = 4.0f;
     [SerializeField] float      m_jumpForce = 7.5f;
     [SerializeField] float      m_rollForce = 6.0f;
     [SerializeField] bool       m_noBlood = false;
     [SerializeField] GameObject m_slideDust;
 
-    [SerializeField] float _effectsDuration;
-    public UnityEvent<float> OnPlayerHit;
-    public UnityEvent OnPlayerRun;
-    public UnityEvent<Vector3> OnPlayerMove;
+    [SerializeField] float      _effectsDuration;
+    public UnityEvent<float>    OnPlayerHit;
+    public UnityEvent<bool>     OnPlayerRun;
+    public UnityEvent<Vector3>  OnPlayerMove;
 
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
@@ -69,6 +70,7 @@ public class HeroKnight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Velocity = _rigidbody.velocity;
         // Increase timer that controls attack combo
         m_timeSinceAttack += Time.deltaTime;
 
@@ -188,7 +190,7 @@ public class HeroKnight : MonoBehaviour
             // Reset timer
             m_delayToIdle = 0.05f;
             m_animator.SetInteger("AnimState", 1);
-            OnPlayerRun?.Invoke();
+            OnPlayerRun?.Invoke(true && m_grounded);
         }
 
         //Idle
@@ -198,6 +200,7 @@ public class HeroKnight : MonoBehaviour
             m_delayToIdle -= Time.deltaTime;
             if (m_delayToIdle < 0)
                 m_animator.SetInteger("AnimState", 0);
+            OnPlayerRun?.Invoke(false);
         }
     }
 
